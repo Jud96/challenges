@@ -1,0 +1,26 @@
+SELECT
+	MONTH,
+	ROUND(
+		(
+			TOTAL - LAG(TOTAL, 1) OVER (
+				ORDER BY
+					MONTH
+			)
+		) * 100 / LAG(TOTAL, 1) OVER (
+			ORDER BY
+				MONTH
+		),
+		2
+	)
+FROM
+	(
+		SELECT
+			TO_CHAR(CREATED_AT, 'yyyy-mm') AS MONTH,
+			SUM(VALUE) AS TOTAL
+		FROM
+			SF_TRANSACTIONS
+		GROUP BY
+			1
+		ORDER BY
+			1
+	) T
