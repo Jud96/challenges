@@ -1,0 +1,42 @@
+SELECT
+	T2.USER1,
+	COUNT(*) * 100.0 / (
+		SELECT
+			COUNT(*) AS ALL_USERS
+		FROM
+			(
+				SELECT
+					USER1
+				FROM
+					FACEBOOK_FRIENDS
+				UNION
+				SELECT
+					USER2
+				FROM
+					FACEBOOK_FRIENDS
+			) T
+	)
+FROM
+	(
+		SELECT DISTINCT
+			USER1,
+			USER2
+		FROM
+			(
+				SELECT
+					USER1,
+					USER2
+				FROM
+					FACEBOOK_FRIENDS
+				UNION
+				SELECT
+					USER2,
+					USER1
+				FROM
+					FACEBOOK_FRIENDS
+			) T
+		ORDER BY
+			USER1
+	) T2
+GROUP BY
+	USER1
