@@ -1,0 +1,1 @@
+Find the rate of processed tickets for each type
