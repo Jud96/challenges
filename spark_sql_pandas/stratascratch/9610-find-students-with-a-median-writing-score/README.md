@@ -1,0 +1,1 @@
+Output ids of students with a median score from the writing SAT.
