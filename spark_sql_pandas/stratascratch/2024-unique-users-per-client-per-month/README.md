@@ -1,0 +1,1 @@
+Write a query that returns the number of unique users per client per month
